@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+        context: .
+        dockerfile: back/Dockerfile
+    container_name: fastapi_app
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/mydatabase
+    ports:
+      - "5555:8000"
+
+  bot:
+    build:
+        context: .
+        dockerfile: bot/Dockerfile
+    container_name: tg_bot
+    environment:
+      - BOT_TOKEN=7876692186:AAHbXDYjZn-fTQS4hrMcBrITenf8HAfwRrY
+
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: test_database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
