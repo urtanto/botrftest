@@ -1,0 +1,26 @@
+{
+  "name": "front",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "autoprefixer": "^10",
+    "postcss": "^8",
+    "tailwindcss": "^3",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vue-scroll-picker": "^2.0.0",
+    "vue-smooth-picker": "^1.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.2.1",
+    "vite-plugin-vue-devtools": "^7.7.2",
+    "vue-cli-plugin-tailwind": "~3.0.0"
+  },
+  "type": "module"
+}
