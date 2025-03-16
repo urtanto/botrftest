@@ -84,7 +84,9 @@ function sendUserData() {
   logs.value = JSON.stringify(
       {
         day: parseInt(selectedDay.value),
-        month: monthList.indexOf(selectedMonth),
+        month: monthList.indexOf(selectedMonth.value),
+        selectedMonth: selectedMonth,
+        selectedMonth_value: selectedMonth.value,
         year: parseInt(selectedYear.value)
       }
   )
