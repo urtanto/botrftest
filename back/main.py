@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 
 from fastapi import FastAPI, Request
@@ -15,6 +16,7 @@ async def on_startup():
 async def root(request: Request):
     body = await request.body()
     body_json = json.loads(body.decode("utf-8"))
+    body_json["birth_date"] = datetime.fromisoformat(body_json["birth_date"].replace("Z", "+00:00"))
 
     print(json.dumps(body_json, indent=2))
 

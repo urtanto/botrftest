@@ -81,7 +81,7 @@ async function sendUserData() {
     data.username = userData.username
     data.birth_date = new Date(
         parseInt(selectedYear.value, 10),
-        monthList.indexOf(selectedMonth.value) + 1,
+        monthList.indexOf(selectedMonth.value),
         parseInt(selectedDay.value, 10),
     )
 
