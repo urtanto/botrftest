@@ -1,20 +1,20 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen px-4 py-8 bg-gradient-to-b from-purple-600 to-blue-700 text-white">
-    <!-- Таблица для выравнивания данных пользователя, без видимых границ -->
+  <div
+      class="flex flex-col items-center justify-center min-h-screen px-4 py-8 bg-gradient-to-b from-purple-600 to-blue-700 text-white">
+    <div class="text-2xl">
+      Карточка пользователя <span class="text-2xl font-bold text-orange-600">{{ username }}</span>
+    </div>
+
     <table class="mb-4">
       <tbody>
-        <tr>
-          <td class="px-4 py-2 text-left font-bold">Username:</td>
-          <td class="px-4 py-2 text-left">{{ username }}</td>
-        </tr>
-        <tr>
-          <td class="px-4 py-2 text-left font-bold">First name:</td>
-          <td class="px-4 py-2 text-left">{{ first_name }}</td>
-        </tr>
-        <tr>
-          <td class="px-4 py-2 text-left font-bold">Last name:</td>
-          <td class="px-4 py-2 text-left">{{ last_name }}</td>
-        </tr>
+      <tr>
+        <td class="py-2 text-left">First name:</td>
+        <td class="px-4 py-2 text-left font-bold">{{ first_name }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 text-left">Last name:</td>
+        <td class="px-4 py-2 text-left font-bold">{{ last_name }}</td>
+      </tr>
       </tbody>
     </table>
 
@@ -22,14 +22,28 @@
       Осталось до дня рождения:
     </div>
 
-    <div class="mb-8 text-xl font-bold">
-      {{ days }} дней {{ hours }} часов {{ minutes }} минут {{ seconds }} секунд
+    <div class="mb-8 text-xl font-thin">
+      <span class="font-bold">{{ days }}</span>
+      дней
+      <span class="font-bold">{{ hours }}</span>
+      часов
+      <span class="font-bold">{{ minutes }}</span>
+      минут
+      <span class="font-bold">{{ seconds }}</span>
+      секунд
     </div>
 
     <button
-      @click="share"
-      class="px-6 py-3 bg-white text-purple-600 font-bold rounded shadow hover:bg-purple-100 transition">
+        v-if="mycard"
+        @click="share"
+        class="px-6 py-3 bg-white text-purple-600 font-bold rounded shadow hover:bg-purple-100 transition mb-4">
       Поделиться
+    </button>
+
+    <button
+        @click="share"
+        class="px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded shadow hover:from-purple-600 hover:to-blue-600 transition">
+      Сгенерировать свою карточку
     </button>
   </div>
 </template>
@@ -43,6 +57,7 @@ const route = useRoute()
 const userUuid = route.params.uuid
 
 let tg_id = null
+let card_tg_id = null
 const username = ref('')
 const first_name = ref('')
 const last_name = ref('')
@@ -59,6 +74,7 @@ onMounted(async () => {
   })
 
   const responseData = await response.json()
+  card_tg_id = responseData.tg_id
   username.value = responseData.username
   first_name.value = responseData.first_name
   last_name.value = responseData.last_name
@@ -102,5 +118,9 @@ const share = () => {
   } else {
     alert('Ваш браузер не поддерживает функцию "Поделиться"')
   }
+}
+
+function mycard() {
+  return tg_id === card_tg_id
 }
 </script>
