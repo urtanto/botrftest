@@ -20,7 +20,6 @@ onMounted(async () => {
   const startParam = initData?.start_param
 
   if (startParam) {
-    history.replaceState({}, document.title, window.location.pathname);
     return await router.push(`/user/${startParam}`)
   }
 
