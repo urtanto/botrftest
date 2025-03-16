@@ -127,6 +127,6 @@ function create_my() {
 }
 
 function mycard() {
-  return tg_id === card_tg_id
+  return tg_id == card_tg_id
 }
 </script>
