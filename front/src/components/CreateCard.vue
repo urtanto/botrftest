@@ -33,6 +33,7 @@
       </span>
     </div>
     <p>username: {{ username }}</p>
+    <p>logs: {{ logs }}</p>
 
     <button
         class="px-6 py-2 mt-6 font-semibold text-purple-700 bg-white rounded-full hover:bg-gray-100"
@@ -48,6 +49,7 @@ import {VueScrollPicker} from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
 
 const username = ref('')
+const logs = ref('')
 
 const dayList = Array.from({length: 31}, (_, i) => (i + 1).toString().padStart(2, '0'))
 const monthList = [
@@ -65,7 +67,8 @@ onMounted(() => {
   if (window.Telegram?.WebApp) {
     window.Telegram.WebApp.ready()
 
-    alert('initDataUnsafe:', window.Telegram.WebApp.initDataUnsafe);
+    logs.value = 'initDataUnsafe: ' + JSON.stringify(window.Telegram.WebApp.initDataUnsafe)
+
     const userData = window.Telegram.WebApp.initDataUnsafe?.user
     username.value = userData?.username ?? 'нет ника'
   }
