@@ -17,8 +17,14 @@ async def on_startup():
 async def root(request: Request):
     body = await request.body()
     body_json = json.loads(body.decode("utf-8"))
-    body_json["birth_date"] = str(datetime.fromisoformat(body_json["birth_date"].replace("Z", "+00:00")))
+    body_json["birth_date"] = datetime.fromisoformat(body_json["birth_date"].replace("Z", "+00:00"))
 
-    print(json.dumps(body_json, indent=2))
+    user = await TgUser.create(
+        tg_id=body_json["tg_id"],
+        first_name=body_json["first_name"],
+        last_name=body_json["last_name"],
+        username=body_json["username"],
+        birth_date=body_json["birth_date"]
+    )
 
-    return {"id": "123"}
+    return {"id": str(user.id)}

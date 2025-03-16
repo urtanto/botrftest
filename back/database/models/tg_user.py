@@ -1,6 +1,6 @@
 import uuid
 from tortoise import models
-from tortoise.fields import UUIDField, TextField, DateField, CharField
+from tortoise.fields import UUIDField, TextField, CharField, DatetimeField
 
 
 class TgUser(models.Model):
@@ -9,7 +9,7 @@ class TgUser(models.Model):
     first_name = TextField(null=True)
     last_name = TextField(null=True)
     username = TextField()
-    birth_date = DateField()
+    birth_date = DatetimeField()
 
     class Meta:
         table = "tg_user"

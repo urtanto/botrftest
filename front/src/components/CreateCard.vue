@@ -72,8 +72,8 @@ async function sendUserData() {
 
     const userData = window.Telegram.WebApp.initDataUnsafe.user
     data.tg_id = userData.id
-    data.first_name = userData?.first_name
-    data.last_name = userData?.last_name
+    data.first_name = userData.first_name ?? ""
+    data.last_name = userData.last_name ?? ""
     data.username = userData.username
     data.birth_date = new Date(
         parseInt(selectedYear.value, 10),
