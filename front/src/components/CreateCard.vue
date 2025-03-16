@@ -73,10 +73,12 @@ onMounted(() => {
       logs.value = 'initDataUnsafe: ' + JSON.stringify(window.Telegram.WebApp.initDataUnsafe)
       const userData = window.Telegram.WebApp.initDataUnsafe?.user
       username.value = userData?.username ?? 'нет ника'
+    } else if (window.Telegram) {
+       logs.value = 'initDataUnsafe: ' + JSON.stringify(window.Telegram, null, 2)
     } else {
       logs.value = `Waiting for Telegram WebApp...${i}`
     }
-  }, 300)
+  }, 1000)
 })
 </script>
 
