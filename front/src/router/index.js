@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CreateCard from '@/components/CreateCard.vue'
-import SecondPage from '@/components/ViewCard.vue'
+import ViewCard from '@/components/ViewCard.vue'
 
 const routes = [
   {
@@ -9,7 +9,7 @@ const routes = [
   },
   {
     path: '/user/:uuid',
-    component: SecondPage
+    component: ViewCard
   }
 ]
 
