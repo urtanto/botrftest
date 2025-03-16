@@ -71,6 +71,8 @@ onMounted(() => {
 
     const userData = window.Telegram.WebApp.initDataUnsafe?.user
     username.value = userData?.username ?? 'нет ника'
+  } else {
+    logs.value = 'No window.Telegram, or no WebApp property found'
   }
 })
 </script>
