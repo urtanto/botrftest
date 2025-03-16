@@ -40,19 +40,11 @@ async def root(request: Request):
     return {"id": str(user.id)}
 
 
-@app.post("/user/{user_id}")
-async def get_user(user_id: str):
-    user = await TgUser.get_or_none(id=user_id)
-    if user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user
-
 @app.post("/user/check")
 async def check_user(request: Request):
     body = await request.body()
     body_json = json.loads(body.decode("utf-8"))
     tg_id = body_json.get("tg_id", None)
-    print(json.dumps(body_json, indent=2))
 
     if tg_id is None:
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -61,3 +53,11 @@ async def check_user(request: Request):
     return {
         "user": user
     }
+
+
+@app.post("/user/{user_id}")
+async def get_user(user_id: str):
+    user = await TgUser.get_or_none(id=user_id)
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
