@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from database import init_db
 from database.models import TgUser
 
@@ -28,3 +28,11 @@ async def root(request: Request):
     )
 
     return {"id": str(user.id)}
+
+
+@app.get("/user/{user_id}")
+async def get_user(user_id: str):
+    user = await TgUser.get_or_none(id=user_id)
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user

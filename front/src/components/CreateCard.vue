@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
+import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {VueScrollPicker} from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
