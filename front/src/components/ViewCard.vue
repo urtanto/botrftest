@@ -41,7 +41,7 @@
       </tr>
     </table>
 
-    <div v-if="mycard()" class="flex gap-4 items-center">
+    <div v-if="!mycard()" class="flex gap-4 items-center">
       <div class="flex gap-2 items-center">
         <button
             @click="share"
@@ -59,7 +59,7 @@
       </div>
 
       <button
-          v-if="!mycard()"
+          v-if="mycard()"
           @click="create_my"
           class="px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded shadow hover:from-purple-600 hover:to-blue-600 transition">
         Сгенерировать свою карточку
@@ -151,11 +151,11 @@ const copyLink = async () => {
   }
 }
 
-function create_my() {
+const create_my = () => {
   router.push('/')
 }
 
-function mycard() {
+const mycard = () => {
   return tg_id == card_tg_id
 }
 </script>
