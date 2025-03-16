@@ -32,7 +32,7 @@
         {{ selectedDay }}.{{ selectedMonth }}.{{ selectedYear }}
       </span>
     </div>
-    <p>username: {{ user?.botUsername ?? 'no' }}</p>
+<!--    <p>username: {{ user?.botUsername ?? 'no' }}</p>-->
 
     <button
         class="px-6 py-2 mt-6 font-semibold text-purple-700 bg-white rounded-full hover:bg-gray-100"
@@ -46,10 +46,10 @@
 import {ref, computed} from 'vue'
 import { VueScrollPicker } from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
-import { useWebApp } from "vue-tg";
-
-const { initDataUnsafe, close } = useWebApp();
-const user = initDataUnsafe.user || {};
+// import { useWebApp } from "vue-tg";
+//
+// const { initDataUnsafe, close } = useWebApp();
+// const user = initDataUnsafe.user || {};
 
 const dayList = Array.from({length: 31}, (_, i) => (i + 1).toString().padStart(2, '0'))
 const monthList = [
