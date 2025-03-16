@@ -32,3 +32,4 @@ front/*.sln
 front/*.sw?
 
 front/*.tsbuildinfo
+front/.vscode

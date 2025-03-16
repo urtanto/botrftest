@@ -19,7 +19,10 @@ async def any_message(message: Message):
         )
     )
 
-    await message.answer(text='Привет. Открой приложение:', reply_markup=builder.as_markup())
+    await message.answer(
+        text='Привет! Узнай сколько осталось до твоего дня рождения, открыв приложение',
+        reply_markup=builder.as_markup()
+    )
 
 
 async def main():

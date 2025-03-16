@@ -46,3 +46,17 @@ async def get_user(user_id: str):
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return user
+
+@app.post("/user/check")
+async def check_user(request: Request):
+    body = await request.body()
+    body_json = json.loads(body.decode("utf-8"))
+    tg_id = body_json.get("tg_id", None)
+
+    if tg_id is None:
+        raise HTTPException(status_code=400, detail="Invalid request")
+
+    user = await TgUser.get_or_none(tg_id=tg_id)
+    return {
+        "user": user
+    }

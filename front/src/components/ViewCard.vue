@@ -99,8 +99,6 @@ const share = () => {
       title: 'Моя карточка',
       url: link,
     })
-    .then(() => console.log('Share successful'))
-    .catch((error) => console.error('Error sharing', error))
   } else {
     alert('Ваш браузер не поддерживает функцию "Поделиться"')
   }
