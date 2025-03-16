@@ -29,10 +29,9 @@
     <div class="mt-6 text-lg">
       Выбранная дата:
       <span class="font-semibold">
-        {{ selectedDay }}.{{ selectedMonth }}.{{ selectedYear }}
+        {{ selectedDay }}.{{ monthList.indexOf(selectedMonth.value) }}.{{ selectedYear }}
       </span>
     </div>
-    <p>username: {{ username }}</p>
     <p>logs: {{ logs }}</p>
 
     <button
@@ -48,8 +47,8 @@ import {ref, onMounted} from 'vue'
 import {VueScrollPicker} from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
 
-const username = ref('')
 const logs = ref('')
+let data = {};
 
 const dayList = Array.from({length: 31}, (_, i) => (i + 1).toString().padStart(2, '0'))
 const monthList = [
@@ -64,22 +63,20 @@ const selectedMonth = ref(monthList[0])
 const selectedYear = ref(yearList[0])
 
 onMounted(() => {
-  if (!window.Telegram) {
-    logs.value = 'Ошибка: window.Telegram не определён (вне Telegram)'
-    return
-  }
-
-  if (!window.Telegram.WebApp) {
-    logs.value = 'Ошибка: window.Telegram.WebApp не определён (не WebApp)'
-    return
-  }
-
   window.Telegram.WebApp.ready()
 
-  logs.value = 'initDataUnsafe: ' + JSON.stringify(window.Telegram.WebApp.initDataUnsafe)
+  const userData = window.Telegram.WebApp.initDataUnsafe.user
+  data.tg_id = userData.id
+  data.first_name = userData.first_name
+  data.last_name = userData.last_name
+  data.username = userData.username
+  data.birth_date = new Date(
+      parseInt(selectedDay.value, 10),
+      monthList.indexOf(selectedMonth.value),
+      parseInt(dayNum.value, 10)
+  )
 
-  const userData = window.Telegram.WebApp.initDataUnsafe?.user
-  username.value = userData?.username ?? 'нет ника'
+  logs.value = JSON.stringify(data)
 })
 </script>
 
