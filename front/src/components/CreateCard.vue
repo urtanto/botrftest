@@ -45,11 +45,15 @@
 
 <script setup>
 import {ref, onMounted} from 'vue'
+import {useRouter} from 'vue-router'
 import {VueScrollPicker} from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
 
 const logs = ref('')
 let data = {};
+
+const router = useRouter()
+const loading = ref(false)
 
 const dayList = Array.from({length: 31}, (_, i) => (i + 1).toString().padStart(2, '0'))
 const monthList = [
@@ -65,20 +69,34 @@ const selectedYear = ref(yearList[0])
 
 
 function sendUserData() {
-  window.Telegram.WebApp.ready()
+  loading.value = true
 
-  const userData = window.Telegram.WebApp.initDataUnsafe.user
-  data.tg_id = userData.id
-  data.first_name = userData?.first_name
-  data.last_name = userData?.last_name
-  data.username = userData.username
-  data.birth_date = new Date(
-      parseInt(selectedYear.value, 10),
-      monthList.indexOf(selectedMonth.value) + 1,
-      parseInt(selectedDay.value, 10),
-  )
+  try {
+    window.Telegram.WebApp.ready()
 
-  logs.value = JSON.stringify(data)
+    const userData = window.Telegram.WebApp.initDataUnsafe.user
+    data.tg_id = userData.id
+    data.first_name = userData?.first_name
+    data.last_name = userData?.last_name
+    data.username = userData.username
+    data.birth_date = new Date(
+        parseInt(selectedYear.value, 10),
+        monthList.indexOf(selectedMonth.value) + 1,
+        parseInt(selectedDay.value, 10),
+    )
+
+    const response = fetch('http://backend:8000/create_card', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).then(response => response.json())
+
+    logs.value = JSON.stringify(response)
+  } catch (error) {
+    alert(error);
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
