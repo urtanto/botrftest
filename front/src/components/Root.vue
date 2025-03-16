@@ -19,11 +19,9 @@ onMounted(async () => {
   const initData = window.Telegram.WebApp.initDataUnsafe
   const startParam = initData?.start_param
 
-  alert(startParam)
-
   if (startParam) {
     history.replaceState({}, document.title, window.location.pathname);
-    await router.push(`/user/${startParam}`)
+    return await router.push(`/user/${startParam}`)
   }
 
   // Get info from Telegram
@@ -42,7 +40,7 @@ onMounted(async () => {
 
     const responseData = await response.json()
     if (responseData.user.id) {
-      await router.push(`/user/${responseData.user.id}`)
+      return await router.push(`/user/${responseData.user.id}`)
     }
   } catch (error) {
   }
