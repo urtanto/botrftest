@@ -76,7 +76,14 @@ onMounted(() => {
       // parseInt(dayNum, 10)
   // )
 
-  logs.value = JSON.stringify(data)
+  // logs.value = JSON.stringify(data)
+  logs.value = JSON.stringify(
+      {
+        day: parseInt(selectedDay.value),
+        month: monthList.indexOf(selectedMonth),
+        year: parseInt(selectedYear.value)
+      }
+  )
 })
 </script>
 
