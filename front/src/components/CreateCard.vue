@@ -88,7 +88,7 @@ async function sendUserData() {
     })
 
     const responseData = await response.json()
-    router.push(`/user/${responseData.id}`)
+    await router.push(`/user/${responseData.id}`)
   } catch (error) {
     alert(error);
   }

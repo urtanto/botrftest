@@ -30,7 +30,7 @@ async def root(request: Request):
     return {"id": str(user.id)}
 
 
-@app.get("/user/{user_id}")
+@app.post("/user/{user_id}")
 async def get_user(user_id: str):
     user = await TgUser.get_or_none(id=user_id)
     if user is None:
