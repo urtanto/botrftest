@@ -102,12 +102,12 @@ setInterval(() => {
   if (diff <= 0) {
     birthday.setFullYear(now.getFullYear() + 1);
     diff = birthday.getTime() - now.getTime();
-  } else {
-    days.value = Math.floor(diff / (1000 * 60 * 60 * 24));
-    hours.value = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    minutes.value = Math.floor((diff / (1000 * 60)) % 60);
-    seconds.value = Math.floor((diff / 1000) % 60);
   }
+
+  days.value = Math.floor(diff / (1000 * 60 * 60 * 24));
+  hours.value = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  minutes.value = Math.floor((diff / (1000 * 60)) % 60);
+  seconds.value = Math.floor((diff / 1000) % 60);
 }, 1000);
 
 const share = () => {

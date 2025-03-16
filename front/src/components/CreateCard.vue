@@ -82,11 +82,6 @@ onMounted(async () => {
   data.first_name = userData.first_name ?? ""
   data.last_name = userData.last_name ?? ""
   data.username = userData.username
-  data.birth_date = new Date(
-      parseInt(selectedYear.value, 10),
-      monthList.indexOf(selectedMonth.value),
-      parseInt(selectedDay.value, 10) + 1,
-  )
 
   const response = await fetch(`https://thesortage.space/api/user/check`, {
     method: 'POST',
@@ -106,6 +101,12 @@ onMounted(async () => {
 
 async function sendUserData() {
   try {
+    data.birth_date = new Date(
+        parseInt(selectedYear.value, 10),
+        monthList.indexOf(selectedMonth.value),
+        parseInt(selectedDay.value, 10) + 1,
+    )
+
     const response = await fetch('https://thesortage.space/api/create_card', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
