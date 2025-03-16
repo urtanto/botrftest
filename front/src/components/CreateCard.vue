@@ -29,7 +29,7 @@
     <div class="mt-6 text-lg">
       Выбранная дата:
       <span class="font-semibold">
-        {{ selectedDay }}.{{ monthList.indexOf(selectedMonth) }}.{{ selectedYear }}
+        {{ selectedDay }}.{{ monthList.indexOf(selectedMonth) + 1 }}.{{ selectedYear }}
       </span>
     </div>
     <p>logs: {{ logs }}</p>
@@ -85,8 +85,7 @@ function sendUserData() {
       {
         day: parseInt(selectedDay.value),
         month: monthList.indexOf(selectedMonth.value),
-        selectedMonth: selectedMonth,
-        selectedMonth_value: selectedMonth.value,
+        selectedMonth: selectedMonth.value,
         year: parseInt(selectedYear.value)
       }
   )
