@@ -29,7 +29,7 @@
     <div class="mt-6 text-lg">
       Выбранная дата:
       <span class="font-semibold">
-        {{ selectedDay }}.{{ monthList.indexOf(selectedMonth.value) }}.{{ selectedYear }}
+        {{ selectedDay }}.{{ monthList.indexOf(selectedMonth) }}.{{ selectedYear }}
       </span>
     </div>
     <p>logs: {{ logs }}</p>
@@ -71,9 +71,9 @@ onMounted(() => {
   data.last_name = userData.last_name
   data.username = userData.username
   data.birth_date = new Date(
-      parseInt(selectedDay.value, 10),
-      monthList.indexOf(selectedMonth.value),
-      parseInt(dayNum.value, 10)
+      parseInt(selectedDay, 10),
+      monthList.indexOf(selectedMonth),
+      parseInt(dayNum, 10)
   )
 
   logs.value = JSON.stringify(data)
