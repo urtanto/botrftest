@@ -67,14 +67,14 @@ onMounted(() => {
 
   const userData = window.Telegram.WebApp.initDataUnsafe.user
   data.tg_id = userData.id
-  data.first_name = userData.first_name
-  data.last_name = userData.last_name
+  data.first_name = userData?.first_name
+  data.last_name = userData?.last_name
   data.username = userData.username
-  data.birth_date = new Date(
-      parseInt(selectedDay, 10),
-      monthList.indexOf(selectedMonth),
-      parseInt(dayNum, 10)
-  )
+  // data.birth_date = new Date(
+      // parseInt(selectedDay, 10),
+      // monthList.indexOf(selectedMonth),
+      // parseInt(dayNum, 10)
+  // )
 
   logs.value = JSON.stringify(data)
 })
