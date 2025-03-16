@@ -18,4 +18,4 @@ async def root(request: Request):
 
     print(json.dumps(body_json, indent=2))
 
-    return {"message": "Hello World"}
+    return {"id": "123"}
