@@ -60,6 +60,6 @@ onMounted(() => {
   window.Telegram.WebApp.ready()
 
   const userData = window.Telegram.WebApp.initDataUnsafe.user
-  data.tg_id = userData.id
+  let tg_id = userData.id
 })
 </script>

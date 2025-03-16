@@ -5,7 +5,17 @@ from fastapi import FastAPI, Request, HTTPException
 from database import init_db
 from database.models import TgUser
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Здесь можно указать конкретные домены вместо "*"
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.on_event("startup")
