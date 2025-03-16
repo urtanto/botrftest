@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {VueScrollPicker} from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
@@ -65,20 +65,20 @@ const selectedDay = ref(dayList[0])
 const selectedMonth = ref(monthList[0])
 const selectedYear = ref(yearList[0])
 
+onMounted(() => {
+  window.Telegram.WebApp.ready()
+
+  const initData = window.Telegram.WebApp.initDataUnsafe
+  const startParam = initData?.start_param
+  alert(startParam)
+})
+
 
 async function sendUserData() {
   try {
     window.Telegram.WebApp.ready()
 
-    const initData = window.Telegram.WebApp.initDataUnsafe
-    const startParam = initData?.start_param
-    alert(startParam)
-
-    if (startParam) {
-      // router.push(startParam)
-    }
-
-    const userData = initData.user
+    const userData = window.Telegram.WebApp.initDataUnsafe.user
     data.tg_id = userData.id
     data.first_name = userData.first_name ?? ""
     data.last_name = userData.last_name ?? ""
