@@ -41,6 +41,7 @@
     </button>
 
     <button
+        v-if="!mycard"
         @click="share"
         class="px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded shadow hover:from-purple-600 hover:to-blue-600 transition">
       Сгенерировать свою карточку
