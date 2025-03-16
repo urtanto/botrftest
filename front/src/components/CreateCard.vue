@@ -71,21 +71,20 @@ onMounted(() => {
   data.first_name = userData?.first_name
   data.last_name = userData?.last_name
   data.username = userData.username
-  // data.birth_date = new Date(
-      // parseInt(selectedDay, 10),
-      // monthList.indexOf(selectedMonth),
-      // parseInt(dayNum, 10)
-  // )
+  data.birth_date = new Date(
+      parseInt(selectedDay.value, 10),
+      monthList.indexOf(selectedMonth.value) + 1,
+      parseInt(selectedYear.value, 10)
+  )
 
-  // logs.value = JSON.stringify(data)
+  logs.value = JSON.stringify(data)
 })
 
 function sendUserData() {
   logs.value = JSON.stringify(
       {
         day: parseInt(selectedDay.value),
-        month: monthList.indexOf(selectedMonth.value),
-        selectedMonth: selectedMonth.value,
+        month: monthList.indexOf(selectedMonth.value) + 1,
         year: parseInt(selectedYear.value)
       }
   )
