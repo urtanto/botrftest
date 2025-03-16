@@ -35,6 +35,7 @@
     <p>logs: {{ logs }}</p>
 
     <button
+        @click="sendUserData"
         class="px-6 py-2 mt-6 font-semibold text-purple-700 bg-white rounded-full hover:bg-gray-100"
     >
       Продолжить
@@ -77,6 +78,9 @@ onMounted(() => {
   // )
 
   // logs.value = JSON.stringify(data)
+})
+
+function sendUserData() {
   logs.value = JSON.stringify(
       {
         day: parseInt(selectedDay.value),
@@ -84,7 +88,7 @@ onMounted(() => {
         year: parseInt(selectedYear.value)
       }
   )
-})
+}
 </script>
 
 <style>
