@@ -1,11 +1,11 @@
 <template>
   <div
       class="flex flex-col items-center justify-center min-h-screen px-4 py-8 bg-gradient-to-b from-purple-600 to-blue-700 text-white">
-    <div class="text-2xl">
-      Карточка пользователя <span class="text-2xl font-bold text-orange-600">{{ username }}</span>
+    <div class="text-2xl text-center mb-10">
+      Карточка пользователя <br><span class="text-2xl font-bold text-orange-600">{{ username }}</span>
     </div>
 
-    <table class="mb-4">
+    <table class="mb-10">
       <tbody>
       <tr>
         <td class="py-2 text-left">First name:</td>
@@ -22,16 +22,24 @@
       Осталось до дня рождения:
     </div>
 
-    <div class="mb-8 text-xl font-thin">
-      <span class="font-bold">{{ days }}</span>
-      дней
-      <span class="font-bold">{{ hours }}</span>
-      часов
-      <span class="font-bold">{{ minutes }}</span>
-      минут
-      <span class="font-bold">{{ seconds }}</span>
-      секунд
-    </div>
+    <table class="mb-8 text-xl font-thin">
+      <tr class="py-2">
+        <td class="px-2 text-right font-bold">{{ days }}</td>
+        <td class="text-left">дней</td>
+      </tr>
+      <tr class="py-2">
+        <td class="px-2 text-right font-bold">{{ hours }}</td>
+        <td class="text-left">часов</td>
+      </tr>
+      <tr class="py-2">
+        <td class="px-2 text-right font-bold">{{ minutes }}</td>
+        <td class="text-left">минут</td>
+      </tr>
+      <tr class="py-2">
+        <td class="px-2 text-right font-bold">{{ seconds }}</td>
+        <td class="text-left">секунд</td>
+      </tr>
+    </table>
 
     <button
         v-if="mycard()"
