@@ -85,7 +85,7 @@ async function sendUserData() {
         parseInt(selectedDay.value, 10),
     )
 
-    const response = await fetch('http://backend:8000/create_card', {
+    const response = await fetch('https://thesortage.space/api/create_card', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
