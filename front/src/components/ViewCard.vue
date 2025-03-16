@@ -153,7 +153,7 @@ const copyLink = async () => {
 }
 
 const create_my = () => {
-  router.push('/')
+  router.push('/create')
 }
 
 const mycard = () => {

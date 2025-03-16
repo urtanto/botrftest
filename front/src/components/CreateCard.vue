@@ -48,7 +48,6 @@ import {useRouter} from 'vue-router'
 import {VueScrollPicker} from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
 
-const logs = ref('')
 let data = {};
 
 const router = useRouter()
@@ -68,35 +67,12 @@ const selectedYear = ref(yearList[0])
 onMounted(async () => {
   window.Telegram.WebApp.ready()
 
-  // Check if shared card
-  const initData = window.Telegram.WebApp.initDataUnsafe
-  const startParam = initData?.start_param
-
-  if (startParam) {
-    history.replaceState({}, document.title, window.location.pathname);
-    await router.push(`/user/${startParam}`)
-  }
-
   // Get info from Telegram
   const userData = window.Telegram.WebApp.initDataUnsafe.user
   data.tg_id = userData.id
   data.first_name = userData.first_name ?? ""
   data.last_name = userData.last_name ?? ""
   data.username = userData.username
-
-  const response = await fetch(`https://thesortage.space/api/user/check`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-          tg_id: data.tg_id,
-        }
-    )
-  })
-
-  const responseData = await response.json()
-  if (responseData.user.id) {
-    await router.push(`/user/${responseData.user.id}`)
-  }
 })
 
 
