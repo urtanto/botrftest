@@ -32,7 +32,6 @@
         {{ selectedDay }}.{{ monthList.indexOf(selectedMonth) + 1 }}.{{ selectedYear }}
       </span>
     </div>
-    <p>logs: {{ logs }}</p>
 
     <button
         @click="sendUserData"
@@ -53,7 +52,6 @@ const logs = ref('')
 let data = {};
 
 const router = useRouter()
-const loading = ref(false)
 
 const dayList = Array.from({length: 31}, (_, i) => (i + 1).toString().padStart(2, '0'))
 const monthList = [
@@ -69,8 +67,6 @@ const selectedYear = ref(yearList[0])
 
 
 async function sendUserData() {
-  loading.value = true
-
   try {
     window.Telegram.WebApp.ready()
 
@@ -79,10 +75,11 @@ async function sendUserData() {
     data.first_name = userData?.first_name
     data.last_name = userData?.last_name
     data.username = userData.username
+    alert(parseInt(selectedDay.value, 10))
     data.birth_date = new Date(
         parseInt(selectedYear.value, 10),
         monthList.indexOf(selectedMonth.value),
-        parseInt(selectedDay.value, 10),
+        parseInt(selectedDay.value, 10) + 1,
     )
 
     const response = await fetch('https://thesortage.space/api/create_card', {
@@ -92,11 +89,9 @@ async function sendUserData() {
     })
 
     const responseData = await response.json()
-    router.push(`/user/${responseData.id}`)
+    // router.push(`/user/${responseData.id}`)
   } catch (error) {
     alert(error);
-  } finally {
-    loading.value = false
   }
 }
 </script>

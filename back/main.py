@@ -3,6 +3,7 @@ import json
 
 from fastapi import FastAPI, Request
 from database import init_db
+from database.models import TgUser
 
 app = FastAPI()
 
