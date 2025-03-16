@@ -98,6 +98,7 @@ onMounted(async () => {
   })
 
   const responseData = await response.json()
+  alert(JSON.stringify(responseData, null, 2))
   if (responseData.user.id) {
     await router.push(`/user/${responseData.user.id}`)
   }

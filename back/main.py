@@ -52,6 +52,7 @@ async def check_user(request: Request):
     body = await request.body()
     body_json = json.loads(body.decode("utf-8"))
     tg_id = body_json.get("tg_id", None)
+    print(json.dumps(body_json, indent=2))
 
     if tg_id is None:
         raise HTTPException(status_code=400, detail="Invalid request")
