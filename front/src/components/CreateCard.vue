@@ -70,7 +70,7 @@ onMounted(() => {
 
   const initData = window.Telegram.WebApp.initDataUnsafe
   const startParam = initData?.start_param
-  alert(startParam)
+  alert(initData)
 })
 
 
