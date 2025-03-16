@@ -64,16 +64,19 @@ const selectedMonth = ref(monthList[0])
 const selectedYear = ref(yearList[0])
 
 onMounted(() => {
-  if (window.Telegram?.WebApp) {
-    window.Telegram.WebApp.ready()
-
-    logs.value = 'initDataUnsafe: ' + JSON.stringify(window.Telegram.WebApp.initDataUnsafe)
-
-    const userData = window.Telegram.WebApp.initDataUnsafe?.user
-    username.value = userData?.username ?? 'нет ника'
-  } else {
-    logs.value = 'No window.Telegram, or no WebApp property found'
-  }
+  let i = 0;
+  const checkTelegram = setInterval(() => {
+    i += 1
+    if (window.Telegram?.WebApp) {
+      clearInterval(checkTelegram)
+      window.Telegram.WebApp.ready()
+      logs.value = 'initDataUnsafe: ' + JSON.stringify(window.Telegram.WebApp.initDataUnsafe)
+      const userData = window.Telegram.WebApp.initDataUnsafe?.user
+      username.value = userData?.username ?? 'нет ника'
+    } else {
+      logs.value = `Waiting for Telegram WebApp...${i}`
+    }
+  }, 300)
 })
 </script>
 
