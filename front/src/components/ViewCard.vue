@@ -42,7 +42,7 @@
 
     <button
         v-if="!mycard()"
-        @click=""
+        @click="create_my"
         class="px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded shadow hover:from-purple-600 hover:to-blue-600 transition">
       Сгенерировать свою карточку
     </button>
@@ -53,6 +53,7 @@
 <script setup>
 import {useRoute} from 'vue-router'
 import {ref, onMounted} from "vue";
+import router from "@/router/index.js";
 
 const route = useRoute()
 const userUuid = route.params.uuid
@@ -119,6 +120,10 @@ const share = () => {
   } else {
     alert('Ваш браузер не поддерживает функцию "Поделиться"')
   }
+}
+
+function create_my() {
+  router.push('/')
 }
 
 function mycard() {
