@@ -68,7 +68,7 @@ const selectedMonth = ref(monthList[0])
 const selectedYear = ref(yearList[0])
 
 
-function sendUserData() {
+async function sendUserData() {
   loading.value = true
 
   try {
@@ -85,13 +85,14 @@ function sendUserData() {
         parseInt(selectedDay.value, 10),
     )
 
-    const response = fetch('http://backend:8000/create_card', {
+    const response = await fetch('http://backend:8000/create_card', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }).then(response => response.json())
+    })
 
-    logs.value = JSON.stringify(response)
+    const responseData = await response.json()
+    logs.value = JSON.stringify(responseData)
   } catch (error) {
     alert(error);
   } finally {
