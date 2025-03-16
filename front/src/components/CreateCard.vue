@@ -63,7 +63,8 @@ const selectedDay = ref(dayList[0])
 const selectedMonth = ref(monthList[0])
 const selectedYear = ref(yearList[0])
 
-onMounted(() => {
+
+function sendUserData() {
   window.Telegram.WebApp.ready()
 
   const userData = window.Telegram.WebApp.initDataUnsafe.user
@@ -72,22 +73,12 @@ onMounted(() => {
   data.last_name = userData?.last_name
   data.username = userData.username
   data.birth_date = new Date(
-      parseInt(selectedDay.value, 10),
+      parseInt(selectedYear.value, 10),
       monthList.indexOf(selectedMonth.value) + 1,
-      parseInt(selectedYear.value, 10)
+      parseInt(selectedDay.value, 10),
   )
 
   logs.value = JSON.stringify(data)
-})
-
-function sendUserData() {
-  logs.value = JSON.stringify(
-      {
-        day: parseInt(selectedDay.value),
-        month: monthList.indexOf(selectedMonth.value) + 1,
-        year: parseInt(selectedYear.value)
-      }
-  )
 }
 </script>
 
