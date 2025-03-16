@@ -19,6 +19,8 @@ onMounted(async () => {
   const initData = window.Telegram.WebApp.initDataUnsafe
   const startParam = initData?.start_param
 
+  alert(startParam)
+
   if (startParam) {
     history.replaceState({}, document.title, window.location.pathname);
     await router.push(`/user/${startParam}`)
