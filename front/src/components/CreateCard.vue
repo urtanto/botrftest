@@ -70,7 +70,15 @@ async function sendUserData() {
   try {
     window.Telegram.WebApp.ready()
 
-    const userData = window.Telegram.WebApp.initDataUnsafe.user
+    const initData = window.Telegram.WebApp.initDataUnsafe
+    const startParam = initData?.start_param
+    alert(startParam)
+
+    if (startParam) {
+      // router.push(startParam)
+    }
+
+    const userData = initData.user
     data.tg_id = userData.id
     data.first_name = userData.first_name ?? ""
     data.last_name = userData.last_name ?? ""
@@ -83,7 +91,7 @@ async function sendUserData() {
 
     const response = await fetch('https://thesortage.space/api/create_card', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data),
     })
 

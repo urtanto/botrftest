@@ -94,9 +94,10 @@ setInterval(() => {
 
 const share = () => {
   if (navigator.share) {
+    const link = `https://t.me/robita_task_bot/TestBirtdayMiniApp?user=${userUuid}`
     navigator.share({
       title: 'Моя карточка',
-      url: window.location.href,
+      url: link,
     })
     .then(() => console.log('Share successful'))
     .catch((error) => console.error('Error sharing', error))
