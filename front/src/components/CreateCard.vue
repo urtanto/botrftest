@@ -65,19 +65,20 @@ const selectedDay = ref(dayList[0])
 const selectedMonth = ref(monthList[0])
 const selectedYear = ref(yearList[0])
 
-onMounted(() => {
+onMounted(async () => {
   window.Telegram.WebApp.ready()
 
   const initData = window.Telegram.WebApp.initDataUnsafe
   const startParam = initData?.start_param
-  alert(JSON.stringify(initData, null, 2))
+
+  if (startParam) {
+    await router.push(`/user/${startParam}`)
+  }
 })
 
 
 async function sendUserData() {
   try {
-    window.Telegram.WebApp.ready()
-
     const userData = window.Telegram.WebApp.initDataUnsafe.user
     data.tg_id = userData.id
     data.first_name = userData.first_name ?? ""

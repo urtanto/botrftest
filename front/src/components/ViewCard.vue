@@ -94,7 +94,7 @@ setInterval(() => {
 
 const share = () => {
   if (navigator.share) {
-    const link = `https://t.me/robita_task_bot/TestBirtdayMiniApp?start=${userUuid}`
+    const link = `https://t.me/robita_task_bot/TestBirtdayMiniApp?startapp=${userUuid}`
     navigator.share({
       title: 'Моя карточка',
       url: link,
