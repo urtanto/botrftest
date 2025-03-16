@@ -44,7 +44,7 @@
 
 <script setup>
 import {ref, onMounted} from 'vue'
-import { VueScrollPicker } from 'vue-scroll-picker'
+import {VueScrollPicker} from 'vue-scroll-picker'
 import "vue-scroll-picker/style.css";
 
 const username = ref('')
@@ -65,6 +65,7 @@ onMounted(() => {
   if (window.Telegram?.WebApp) {
     window.Telegram.WebApp.ready()
 
+    alert('initDataUnsafe:', window.Telegram.WebApp.initDataUnsafe);
     const userData = window.Telegram.WebApp.initDataUnsafe?.user
     username.value = userData?.username ?? 'нет ника'
   }
@@ -81,7 +82,7 @@ onMounted(() => {
 }
 
 .vue-scroll-picker-item[aria-selected=true] {
-    color: white;
+  color: white;
 }
 
 .vue-scroll-picker-layer-bottom {
