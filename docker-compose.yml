@@ -1,19 +1,20 @@
 services:
   frontend:
     build:
-        context: front/
-        dockerfile: Dockerfile
+      context: front/
+      dockerfile: Dockerfile
     container_name: vue_frontend
     ports:
       - "5555:8080"
 
   backend:
     build:
-        context: .
-        dockerfile: back/Dockerfile
+      context: .
+      dockerfile: back/Dockerfile
     container_name: fastapi_app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DATABASE_URL=postgresql://postgres:password@db:5432/mydatabase
     ports:
@@ -21,8 +22,8 @@ services:
 
   bot:
     build:
-        context: .
-        dockerfile: bot/Dockerfile
+      context: .
+      dockerfile: bot/Dockerfile
     container_name: tg_bot
     environment:
       - BOT_TOKEN=7876692186:AAHbXDYjZn-fTQS4hrMcBrITenf8HAfwRrY
@@ -35,6 +36,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: test_password
       POSTGRES_DB: test_database
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
       - postgres_data:/var/lib/postgresql/dataл
 
